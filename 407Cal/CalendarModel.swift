@@ -12,11 +12,14 @@ class Calendar {
     
     static let shared = Calendar()
     
+    
+    //TESTING CODE!!!
     func populateSampleData(num: Int) {
-        for _ in 0...num {
+        for _ in 0...(num - 1) {
             Calendar.shared.add(Event(date: NSDate(), title: "Sample Title", location: "Sample Location", notes: "Sample Notes"))
         }
     }
+    //TESTING CODE!!!
     
     
     var nextGUID : Int

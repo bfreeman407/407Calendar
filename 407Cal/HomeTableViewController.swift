@@ -9,13 +9,22 @@
 import UIKit
 
 class HomeTableViewController: UITableViewController {
-
+    
+    var currentEvent : Event?
     
     override func viewDidLoad() {
-        
+        print("loaded home view!")
         super.viewDidLoad()
-        Calendar.shared.populateSampleData(5)
+        
 
+        //
+        //*********************************
+        //TEST CODE!!! REMOVE!!!
+        //Calendar.shared.populateSampleData(5)
+        //TEST CODE!!!
+        //*********************************
+        //
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -26,6 +35,11 @@ class HomeTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -48,6 +62,7 @@ class HomeTableViewController: UITableViewController {
         
         let eventForCurrentRow = Calendar.shared.events[indexPath.row]
         cell.textLabel?.text = eventForCurrentRow.eventTitle
+        cell.tag = indexPath.row
         
 
         return cell
@@ -89,14 +104,25 @@ class HomeTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "homeToDetail" {
+            let nextViewController = segue.destinationViewController as! DetailViewController
+            let selectedCell = sender as! UITableViewCell
+            self.currentEvent = Calendar.shared.events[selectedCell.tag]
+            nextViewController.currentEvent = self.currentEvent
+        }
+        else if segue.identifier == "homeToEdit" {
+            let nextViewController = segue.destinationViewController as! EditViewController
+            nextViewController.currentEvent = Event(date: NSDate(), title: "", location: "", notes: "")
+        }
     }
-    */
+
 
 }

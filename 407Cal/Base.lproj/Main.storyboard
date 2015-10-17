@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="baG-mm-bBM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Home Table View Controller-->
@@ -22,7 +23,7 @@
                                 </tableViewCellContentView>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <segue destination="rbE-Of-jab" kind="show" id="97G-1M-Nzf"/>
+                                    <segue destination="rbE-Of-jab" kind="show" identifier="homeToDetail" id="97G-1M-Nzf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -34,12 +35,13 @@
                     <navigationItem key="navigationItem" id="HR0-Xh-5et">
                         <barButtonItem key="rightBarButtonItem" title="New Event" id="ch2-1j-plw">
                             <connections>
-                                <segue destination="gSy-18-GJG" kind="show" id="chg-9D-0R1"/>
+                                <segue destination="gSy-18-GJG" kind="show" identifier="homeToEdit" id="chg-9D-0R1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ev0-bp-6Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Lcr-Ri-LoZ"/>
             </objects>
             <point key="canvasLocation" x="1178" y="507"/>
         </scene>
@@ -54,8 +56,68 @@
                     <view key="view" contentMode="scaleToFill" id="rF4-EA-hZc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="BUl-wN-DE0">
+                                <rect key="frame" x="0.0" y="130" width="600" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="85" id="VFX-RW-RmW"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="466748657.03191501">
+                                    <!--2015-10-17 04:24:17 +0000-->
+                                </date>
+                            </datePicker>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GUS-Ci-x1I">
+                                <rect key="frame" x="117" y="299" width="367" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0L6-6I-73o">
+                                <rect key="frame" x="117" y="261" width="367" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A3G-gk-5Pw">
+                                <rect key="frame" x="117" y="337" width="367" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Dq-2c-lTQ">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Delete Event" id="C1Z-aN-Sj7"/>
+                                    <barButtonItem title="Save Event" id="DMy-Ye-2xT">
+                                        <connections>
+                                            <action selector="saveEvent:" destination="gSy-18-GJG" id="2LK-se-dgJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="BUl-wN-DE0" secondAttribute="trailing" id="Ckg-l6-8RB"/>
+                            <constraint firstItem="GUS-Ci-x1I" firstAttribute="top" secondItem="0L6-6I-73o" secondAttribute="bottom" constant="8" symbolic="YES" id="Hpv-dD-Peg"/>
+                            <constraint firstItem="BUl-wN-DE0" firstAttribute="trailing" secondItem="0Dq-2c-lTQ" secondAttribute="trailing" id="IkH-0Y-SBJ"/>
+                            <constraint firstItem="0Dq-2c-lTQ" firstAttribute="leading" secondItem="BUl-wN-DE0" secondAttribute="leading" id="SEC-dP-P64"/>
+                            <constraint firstItem="0Dq-2c-lTQ" firstAttribute="bottom" secondItem="Gd5-7P-eUo" secondAttribute="top" id="YGJ-Yn-R9i"/>
+                            <constraint firstItem="0L6-6I-73o" firstAttribute="leading" secondItem="rF4-EA-hZc" secondAttribute="leadingMargin" constant="97" id="c6W-br-ojK"/>
+                            <constraint firstItem="BUl-wN-DE0" firstAttribute="top" secondItem="lVB-LE-21H" secondAttribute="bottom" constant="66" id="fFW-li-Ol0"/>
+                            <constraint firstItem="BUl-wN-DE0" firstAttribute="leading" secondItem="rF4-EA-hZc" secondAttribute="leading" id="g5k-GP-3Lb"/>
+                            <constraint firstItem="A3G-gk-5Pw" firstAttribute="trailing" secondItem="GUS-Ci-x1I" secondAttribute="trailing" id="ldD-XG-HLC"/>
+                            <constraint firstItem="0L6-6I-73o" firstAttribute="leading" secondItem="GUS-Ci-x1I" secondAttribute="leading" id="o53-eZ-ioN"/>
+                            <constraint firstItem="A3G-gk-5Pw" firstAttribute="leading" secondItem="GUS-Ci-x1I" secondAttribute="leading" id="oVI-gh-ig5"/>
+                            <constraint firstItem="0L6-6I-73o" firstAttribute="trailing" secondItem="GUS-Ci-x1I" secondAttribute="trailing" id="qJE-ji-IYe"/>
+                            <constraint firstItem="BUl-wN-DE0" firstAttribute="centerX" secondItem="0L6-6I-73o" secondAttribute="centerX" id="vKW-1a-qIj"/>
+                            <constraint firstItem="0L6-6I-73o" firstAttribute="top" secondItem="BUl-wN-DE0" secondAttribute="bottom" constant="46" id="xry-98-fyt"/>
+                            <constraint firstItem="A3G-gk-5Pw" firstAttribute="top" secondItem="GUS-Ci-x1I" secondAttribute="bottom" constant="8" symbolic="YES" id="yzR-m8-5l0"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="datePicker" destination="BUl-wN-DE0" id="Lhe-NU-ZA9"/>
+                        <outlet property="locationTextField" destination="GUS-Ci-x1I" id="b1w-d5-3Pp"/>
+                        <outlet property="notesTextField" destination="A3G-gk-5Pw" id="tWT-6L-hYg"/>
+                        <outlet property="titleTextField" destination="0L6-6I-73o" id="JCM-Zv-tOm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qdf-yh-LlS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -73,16 +135,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPJ-ER-srE">
-                                <rect key="frame" x="74" y="163" width="30" height="30"/>
-                                <state key="normal" title="Edit"/>
-                                <connections>
-                                    <segue destination="gSy-18-GJG" kind="show" id="7eM-UD-MpP"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrC-fn-GAd">
+                                <rect key="frame" x="279" y="212" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OrC-fn-GAd" firstAttribute="centerX" secondItem="7vp-TR-HPI" secondAttribute="centerX" id="5vB-0h-dZE"/>
+                            <constraint firstItem="OrC-fn-GAd" firstAttribute="top" secondItem="60s-2b-Nvy" secondAttribute="bottom" constant="148" id="QJv-XF-BtO"/>
+                        </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="wqE-Ne-VeC">
+                        <barButtonItem key="rightBarButtonItem" title="Edit Event" id="DTH-S7-TlF">
+                            <connections>
+                                <segue destination="gSy-18-GJG" kind="show" id="T7C-fK-gaC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="testLabel" destination="OrC-fn-GAd" id="Kkr-LS-ljV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Rn-F6-8QB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

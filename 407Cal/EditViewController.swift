@@ -9,9 +9,43 @@
 import UIKit
 
 class EditViewController: UIViewController {
+    
+    var currentEvent : Event?
 
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBOutlet weak var titleTextField: UITextField!
+    
+    @IBOutlet weak var locationTextField: UITextField!
+    
+    @IBOutlet weak var notesTextField: UITextField!
+    
+    @IBAction func saveEvent(sender: AnyObject) {
+        currentEvent?.eventDate = datePicker.date
+        currentEvent?.eventTitle = titleTextField.text!
+        currentEvent?.eventLocation = locationTextField.text!
+        currentEvent?.eventNotes = notesTextField.text!
+        
+        Calendar.shared.add(currentEvent!)
+        
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
+        datePicker.date = currentEvent!.eventDate
+        
+        if self.currentEvent?.eventTitle != "" {
+            titleTextField.text = currentEvent?.eventTitle
+        }
+        
+        if self.currentEvent?.eventLocation != "" {
+            locationTextField.text = currentEvent?.eventLocation
+        }
+        
+        if self.currentEvent?.eventNotes != "" {
+            notesTextField.text = currentEvent?.eventNotes
+        }
     }
 
     override func didReceiveMemoryWarning() {

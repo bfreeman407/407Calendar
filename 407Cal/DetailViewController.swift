@@ -9,9 +9,15 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    var currentEvent : Event?
 
+    @IBOutlet weak var testLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        testLabel.text = currentEvent?.eventTitle
 
         // Do any additional setup after loading the view.
     }
