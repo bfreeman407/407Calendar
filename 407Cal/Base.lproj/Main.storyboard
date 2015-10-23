@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Home Table View Controller-->
+        <!--Agenda-->
         <scene sceneID="ZYu-rs-99p">
             <objects>
                 <tableViewController id="hpm-M4-I29" customClass="HomeTableViewController" customModule="_07Cal" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,7 +32,7 @@
                             <outlet property="delegate" destination="hpm-M4-I29" id="ETL-R3-tgA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="HR0-Xh-5et">
+                    <navigationItem key="navigationItem" title="Agenda" id="HR0-Xh-5et">
                         <barButtonItem key="rightBarButtonItem" title="New Event" id="ch2-1j-plw">
                             <connections>
                                 <segue destination="gSy-18-GJG" kind="show" identifier="homeToEdit" id="chg-9D-0R1"/>
@@ -41,7 +41,6 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ev0-bp-6Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Lcr-Ri-LoZ"/>
             </objects>
             <point key="canvasLocation" x="1178" y="507"/>
         </scene>
@@ -84,7 +83,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Dq-2c-lTQ">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Delete Event" id="C1Z-aN-Sj7"/>
+                                    <barButtonItem title="Delete Event" id="C1Z-aN-Sj7">
+                                        <connections>
+                                            <action selector="deleteEvent:" destination="gSy-18-GJG" id="pzT-fe-a96"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="Save Event" id="DMy-Ye-2xT">
                                         <connections>
                                             <action selector="saveEvent:" destination="gSy-18-GJG" id="2LK-se-dgJ"/>
@@ -112,6 +115,7 @@
                             <constraint firstItem="A3G-gk-5Pw" firstAttribute="top" secondItem="GUS-Ci-x1I" secondAttribute="bottom" constant="8" symbolic="YES" id="yzR-m8-5l0"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="hch-H8-eZb"/>
                     <connections>
                         <outlet property="datePicker" destination="BUl-wN-DE0" id="Lhe-NU-ZA9"/>
                         <outlet property="locationTextField" destination="GUS-Ci-x1I" id="b1w-d5-3Pp"/>
@@ -152,7 +156,7 @@
                     <navigationItem key="navigationItem" id="wqE-Ne-VeC">
                         <barButtonItem key="rightBarButtonItem" title="Edit Event" id="DTH-S7-TlF">
                             <connections>
-                                <segue destination="gSy-18-GJG" kind="show" id="T7C-fK-gaC"/>
+                                <segue destination="gSy-18-GJG" kind="show" identifier="detailToEdit" id="T7C-fK-gaC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

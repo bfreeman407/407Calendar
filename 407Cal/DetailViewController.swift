@@ -16,8 +16,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        testLabel.text = currentEvent?.eventTitle
 
         // Do any additional setup after loading the view.
     }
@@ -27,15 +25,30 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
 
-    /*
+        
+        let df = NSDateFormatter()
+        df.timeStyle = .ShortStyle
+        df.dateStyle = .ShortStyle
+        
+        testLabel.text = df.stringFromDate(currentEvent!.eventDate)
+    }
+    
+    
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "detailToEdit" {
+            let nextViewController = segue.destinationViewController as! EditViewController
+            nextViewController.currentEvent = self.currentEvent
+        }
     }
-    */
-
 }

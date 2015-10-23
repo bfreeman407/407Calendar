@@ -12,6 +12,8 @@ class Calendar {
     
     static let shared = Calendar()
     
+    private let defaults = NSUserDefaults.standardUserDefaults()
+    
     
     //TESTING CODE!!!
     func populateSampleData(num: Int) {
@@ -21,8 +23,55 @@ class Calendar {
     }
     //TESTING CODE!!!
     
+    func restoreSavedData() {
+        
+        if defaults.arrayForKey("savedDates") == nil {
+            return
+        }
+        
+        let savedDates = defaults.arrayForKey("savedDates")as! [NSDate]?
+        let savedTitles = defaults.arrayForKey("savedTitles") as! [String]?
+        let savedLocations = defaults.arrayForKey("savedLocations") as! [String]?
+        let savedNotes = defaults.arrayForKey("savedNotes") as! [String]?
+        
+        assert(savedDates!.count == savedTitles!.count && savedTitles!.count == savedLocations!.count
+            && savedLocations!.count == savedNotes!.count)
+        
+        for i in 0...(savedDates!.count - 1) {
+            Calendar.shared.add(Event(date: savedDates![i], title: savedTitles![i], location: savedLocations![i], notes: savedNotes![i]))
+        }
+        
+    }
     
-    var nextGUID : Int
+    private func updateSavedData() {
+        
+        if events.count <= 0 {
+            defaults.removeObjectForKey("savedDates")
+            defaults.removeObjectForKey("savedTitles")
+            defaults.removeObjectForKey("savedLocations")
+            defaults.removeObjectForKey("savedNotes")
+            return
+        }
+        
+        var savedDates = [NSDate]()
+        var savedTitles = [String]()
+        var savedLocations = [String]()
+        var savedNotes = [String]()
+        
+        for i in 0...(events.count - 1) {
+            savedDates.insert(events[i].eventDate, atIndex: i)
+            savedTitles.insert(events[i].eventTitle, atIndex: i)
+            savedLocations.insert(events[i].eventLocation, atIndex: i)
+            savedNotes.insert(events[i].eventNotes, atIndex: i)
+        }
+        
+        defaults.setObject(savedDates, forKey: "savedDates")
+        defaults.setObject(savedTitles, forKey: "savedTitles")
+        defaults.setObject(savedLocations, forKey: "savedLocations")
+        defaults.setObject(savedNotes, forKey: "savedNotes")
+    }
+    
+    private var nextGUID : Int
     var events : [Event]
     
     init() {
@@ -55,7 +104,8 @@ class Calendar {
         //date is found, the index will (correctly) be the end of the array
         
         var newEventIndex = 0
-        if events.count < 0 {
+        if events.count > 0 {
+
             for i in 0...(events.count - 1) {
                 if event.eventDate.compare(events[i].eventDate) == NSComparisonResult.OrderedAscending {
                     break
@@ -65,11 +115,33 @@ class Calendar {
         }
         //add the new event at the designated index
         events.insert(event, atIndex: newEventIndex)
+        
+        //store the updated data persistently
+        self.updateSavedData()
     }
     
-    func remove(guid: Int) {
+    func remove(e : Event) {
         //step through the array looking for an event with matching GUID,
         //then remove it
+        for i in 0...(events.count - 1) {
+            if events[i].eventGUID == e.eventGUID {
+                events.removeAtIndex(i)
+                break;
+            }
+        }
+        
+        self.updateSavedData()
+    }
+    
+    func getDay(date : NSDate) -> [Event]{
+        var daysEvents = [Event]()
+        for e in events {
+            if e.eventDate.compare(date) == NSComparisonResult.OrderedSame {
+                daysEvents.append(e)
+            }
+        }
+        
+        return daysEvents
     }
     
 }

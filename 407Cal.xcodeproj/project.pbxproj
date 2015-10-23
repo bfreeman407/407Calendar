@@ -299,6 +299,7 @@
 				B5EFB1BC1BD1836000762E48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

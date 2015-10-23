@@ -11,9 +11,8 @@ import UIKit
 class HomeTableViewController: UITableViewController {
     
     var currentEvent : Event?
-    
+
     override func viewDidLoad() {
-        print("loaded home view!")
         super.viewDidLoad()
         
 
@@ -37,20 +36,20 @@ class HomeTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
-        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // return the number of rows
         return Calendar.shared.events.count
     }
 

@@ -31,6 +31,14 @@ class EditViewController: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
         
     }
+    
+    @IBAction func deleteEvent(sender: AnyObject) {
+        Calendar.shared.remove(currentEvent!)
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         datePicker.date = currentEvent!.eventDate
