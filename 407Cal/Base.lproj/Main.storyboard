@@ -32,17 +32,84 @@
                             <outlet property="delegate" destination="hpm-M4-I29" id="ETL-R3-tgA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Agenda" id="HR0-Xh-5et">
-                        <barButtonItem key="rightBarButtonItem" title="New Event" id="ch2-1j-plw">
+                    <toolbarItems>
+                        <barButtonItem title="Day View" id="ENd-q2-Mcz">
+                            <connections>
+                                <segue destination="Adx-II-iV6" kind="presentation" identifier="hometoDay" id="KtV-rf-dKE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="aiX-ji-Obn"/>
+                        <barButtonItem title="New Event" id="ch2-1j-plw">
                             <connections>
                                 <segue destination="gSy-18-GJG" kind="show" identifier="homeToEdit" id="chg-9D-0R1"/>
                             </connections>
                         </barButtonItem>
-                    </navigationItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Agenda" id="HR0-Xh-5et"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ev0-bp-6Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1178" y="507"/>
+        </scene>
+        <!--Day Table View Controller-->
+        <scene sceneID="ZL5-p3-6OZ">
+            <objects>
+                <tableViewController id="irK-Zy-VuD" customClass="DayTableViewController" customModule="_07Cal" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5E9-Iq-axz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="daycell" id="EEF-54-ieT">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EEF-54-ieT" id="cvd-SN-gBw">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="rbE-Of-jab" kind="show" identifier="dayToDetail" id="oJJ-pp-3vl"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="irK-Zy-VuD" id="I1Z-wh-3xL"/>
+                            <outlet property="delegate" destination="irK-Zy-VuD" id="hGK-KL-cjD"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Agenda View" id="y1Z-ab-7lR">
+                            <connections>
+                                <segue destination="baG-mm-bBM" kind="presentation" id="zX4-Vj-MfR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="khF-td-ptk"/>
+                        <barButtonItem title="New Event" id="rUN-dq-QpD">
+                            <connections>
+                                <segue destination="gSy-18-GJG" kind="show" identifier="dayToEdit" id="qM8-LJ-WJB"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="Iwn-vw-HeE">
+                        <barButtonItem key="leftBarButtonItem" title="Previous Day" id="fxR-aT-L8r">
+                            <connections>
+                                <segue destination="irK-Zy-VuD" kind="show" identifier="dayToPrevious" animates="NO" id="2eI-16-ETE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Next Day" id="lDy-gq-saO">
+                            <connections>
+                                <segue destination="irK-Zy-VuD" kind="show" identifier="dayToNext" animates="NO" id="hl3-k2-e7Q"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="navBarItem" destination="Iwn-vw-HeE" id="XVS-ge-JR3"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vLt-cR-yhK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2719" y="130"/>
         </scene>
         <!--Edit View Controller-->
         <scene sceneID="TrP-Xj-16H">
@@ -80,29 +147,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Dq-2c-lTQ">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem title="Delete Event" id="C1Z-aN-Sj7">
-                                        <connections>
-                                            <action selector="deleteEvent:" destination="gSy-18-GJG" id="pzT-fe-a96"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Save Event" id="DMy-Ye-2xT">
-                                        <connections>
-                                            <action selector="saveEvent:" destination="gSy-18-GJG" id="2LK-se-dgJ"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="BUl-wN-DE0" secondAttribute="trailing" id="Ckg-l6-8RB"/>
                             <constraint firstItem="GUS-Ci-x1I" firstAttribute="top" secondItem="0L6-6I-73o" secondAttribute="bottom" constant="8" symbolic="YES" id="Hpv-dD-Peg"/>
-                            <constraint firstItem="BUl-wN-DE0" firstAttribute="trailing" secondItem="0Dq-2c-lTQ" secondAttribute="trailing" id="IkH-0Y-SBJ"/>
-                            <constraint firstItem="0Dq-2c-lTQ" firstAttribute="leading" secondItem="BUl-wN-DE0" secondAttribute="leading" id="SEC-dP-P64"/>
-                            <constraint firstItem="0Dq-2c-lTQ" firstAttribute="bottom" secondItem="Gd5-7P-eUo" secondAttribute="top" id="YGJ-Yn-R9i"/>
                             <constraint firstItem="0L6-6I-73o" firstAttribute="leading" secondItem="rF4-EA-hZc" secondAttribute="leadingMargin" constant="97" id="c6W-br-ojK"/>
                             <constraint firstItem="BUl-wN-DE0" firstAttribute="top" secondItem="lVB-LE-21H" secondAttribute="bottom" constant="66" id="fFW-li-Ol0"/>
                             <constraint firstItem="BUl-wN-DE0" firstAttribute="leading" secondItem="rF4-EA-hZc" secondAttribute="leading" id="g5k-GP-3Lb"/>
@@ -115,6 +164,19 @@
                             <constraint firstItem="A3G-gk-5Pw" firstAttribute="top" secondItem="GUS-Ci-x1I" secondAttribute="bottom" constant="8" symbolic="YES" id="yzR-m8-5l0"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Delete Event" id="C1Z-aN-Sj7">
+                            <connections>
+                                <action selector="deleteEvent:" destination="gSy-18-GJG" id="pzT-fe-a96"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="sNp-aC-UYH"/>
+                        <barButtonItem title="Save Event" id="DMy-Ye-2xT">
+                            <connections>
+                                <action selector="saveEvent:" destination="gSy-18-GJG" id="2LK-se-dgJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="hch-H8-eZb"/>
                     <connections>
                         <outlet property="datePicker" destination="BUl-wN-DE0" id="Lhe-NU-ZA9"/>
@@ -139,17 +201,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrC-fn-GAd">
-                                <rect key="frame" x="279" y="212" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrC-fn-GAd">
+                                <rect key="frame" x="0.0" y="168" width="600" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ONn-G1-jvU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGv-iG-XZC">
+                                <rect key="frame" x="279" y="197" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjM-f8-EMS">
+                                <rect key="frame" x="279" y="226" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cf-zo-jmq">
+                                <rect key="frame" x="279" y="255" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PtN-OR-kq8">
+                                <rect key="frame" x="180" y="280" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="1RP-yH-M7Z"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OrC-fn-GAd" firstAttribute="centerX" secondItem="7vp-TR-HPI" secondAttribute="centerX" id="5vB-0h-dZE"/>
-                            <constraint firstItem="OrC-fn-GAd" firstAttribute="top" secondItem="60s-2b-Nvy" secondAttribute="bottom" constant="148" id="QJv-XF-BtO"/>
+                            <constraint firstItem="OrC-fn-GAd" firstAttribute="top" secondItem="60s-2b-Nvy" secondAttribute="bottom" constant="104" id="587-59-dEZ"/>
+                            <constraint firstItem="YjM-f8-EMS" firstAttribute="leading" secondItem="4Cf-zo-jmq" secondAttribute="leading" id="C8J-yY-prS"/>
+                            <constraint firstAttribute="trailing" secondItem="OrC-fn-GAd" secondAttribute="trailing" id="GqW-Qd-C8l"/>
+                            <constraint firstItem="OrC-fn-GAd" firstAttribute="leading" secondItem="7vp-TR-HPI" secondAttribute="leading" id="IqM-dR-v9U"/>
+                            <constraint firstItem="PtN-OR-kq8" firstAttribute="top" secondItem="4Cf-zo-jmq" secondAttribute="bottom" constant="4" id="Izv-B5-O6D"/>
+                            <constraint firstItem="4Cf-zo-jmq" firstAttribute="centerX" secondItem="PtN-OR-kq8" secondAttribute="centerX" id="MGj-AS-uMf"/>
+                            <constraint firstItem="WGv-iG-XZC" firstAttribute="top" secondItem="OrC-fn-GAd" secondAttribute="bottom" constant="8" symbolic="YES" id="PoI-lJ-2D9"/>
+                            <constraint firstItem="Lvy-h3-5Za" firstAttribute="top" secondItem="PtN-OR-kq8" secondAttribute="bottom" constant="148" id="Ppu-yx-wMD"/>
+                            <constraint firstItem="OrC-fn-GAd" firstAttribute="centerX" secondItem="WGv-iG-XZC" secondAttribute="centerX" id="RNs-tT-8iJ"/>
+                            <constraint firstItem="YjM-f8-EMS" firstAttribute="top" secondItem="WGv-iG-XZC" secondAttribute="bottom" constant="8" symbolic="YES" id="kls-Q7-AJS"/>
+                            <constraint firstItem="YjM-f8-EMS" firstAttribute="leading" secondItem="WGv-iG-XZC" secondAttribute="leading" id="lxV-Lg-VsB"/>
+                            <constraint firstItem="4Cf-zo-jmq" firstAttribute="top" secondItem="YjM-f8-EMS" secondAttribute="bottom" constant="8" symbolic="YES" id="x34-ag-c1t"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -162,7 +264,11 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="testLabel" destination="OrC-fn-GAd" id="Kkr-LS-ljV"/>
+                        <outlet property="dateLabel" destination="WGv-iG-XZC" id="C5n-fp-20c"/>
+                        <outlet property="locationLabel" destination="4Cf-zo-jmq" id="pV9-5C-pqD"/>
+                        <outlet property="notesText" destination="PtN-OR-kq8" id="VsE-VI-J24"/>
+                        <outlet property="timeLabel" destination="YjM-f8-EMS" id="1zx-ze-jAB"/>
+                        <outlet property="titleLabel" destination="OrC-fn-GAd" id="Iwb-mk-0GI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Rn-F6-8QB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -172,13 +278,17 @@
         <!--Navigation Controller-->
         <scene sceneID="gAg-69-h3v">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="baG-mm-bBM" customClass="NavigationController" customModule="_07Cal" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="baG-mm-bBM" customClass="NavigationController" customModule="_07Cal" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ffE-n6-dSq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="U0R-vh-wdU">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="hpm-M4-I29" kind="relationship" relationship="rootViewController" id="Lqe-B6-bJQ"/>
                     </connections>
@@ -187,8 +297,32 @@
             </objects>
             <point key="canvasLocation" x="366" y="507"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VSv-FY-UmM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Adx-II-iV6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="stq-o4-d4n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="fbJ-Wx-InT">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="irK-Zy-VuD" kind="relationship" relationship="rootViewController" id="soB-9h-rRA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R3B-gi-fc2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1907" y="130"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="chg-9D-0R1"/>
+        <segue reference="soB-9h-rRA"/>
+        <segue reference="qM8-LJ-WJB"/>
+        <segue reference="oJJ-pp-3vl"/>
     </inferredMetricsTieBreakers>
 </document>

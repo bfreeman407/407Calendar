@@ -134,13 +134,22 @@ class Calendar {
     }
     
     func getDay(date : NSDate) -> [Event]{
+        let cal = NSCalendar.currentCalendar()
+        let selectedDay = cal.component(NSCalendarUnit.Day, fromDate: date)
+        let selectedMonth = cal.component(NSCalendarUnit.Month, fromDate: date)
+        let selectedYear = cal.component(NSCalendarUnit.Year, fromDate: date)
+        
+        
         var daysEvents = [Event]()
         for e in events {
-            if e.eventDate.compare(date) == NSComparisonResult.OrderedSame {
+
+                let matchDay = cal.component(NSCalendarUnit.Day, fromDate: e.eventDate)
+                let matchMonth = cal.component(NSCalendarUnit.Month, fromDate: e.eventDate)
+                let matchYear = cal.component(NSCalendarUnit.Year, fromDate: e.eventDate)
+                if selectedDay == matchDay && selectedMonth == matchMonth && selectedYear == matchYear{
                 daysEvents.append(e)
             }
         }
-        
         return daysEvents
     }
     

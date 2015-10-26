@@ -12,9 +12,16 @@ class DetailViewController: UIViewController {
     
     var currentEvent : Event?
 
-    @IBOutlet weak var testLabel: UILabel!
+    
+    
+    @IBOutlet weak var notesText: UITextView!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -30,11 +37,18 @@ class DetailViewController: UIViewController {
         super.viewWillAppear(animated)
 
         
-        let df = NSDateFormatter()
-        df.timeStyle = .ShortStyle
-        df.dateStyle = .ShortStyle
+        let timeFormatter = NSDateFormatter()
+        let dateFormatter = NSDateFormatter()
         
-        testLabel.text = df.stringFromDate(currentEvent!.eventDate)
+        timeFormatter.timeStyle = .MediumStyle
+        dateFormatter.dateStyle = .MediumStyle
+        
+        titleLabel.text = currentEvent?.eventTitle
+        dateLabel.text = dateFormatter.stringFromDate(currentEvent!.eventDate)
+        timeLabel.text = timeFormatter.stringFromDate(currentEvent!.eventDate)
+        locationLabel.text = currentEvent?.eventLocation
+        notesText.text = currentEvent?.eventNotes
+
     }
     
     

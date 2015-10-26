@@ -1,39 +1,39 @@
 //
-//  HomeTableViewController.swift
+//  DayTableViewController.swift
 //  407Cal
 //
-//  Created by Ben Freeman on 10/16/15.
+//  Created by Ben Freeman on 10/26/15.
 //  Copyright © 2015 Ben Freeman. All rights reserved.
 //
 
 import UIKit
 
-class HomeTableViewController: UITableViewController {
+class DayTableViewController: UITableViewController {
     
+    var currentDay = NSDate()
     var currentEvent : Event?
+    var daysEvents : [Event]?
+    var outgoingDay : NSDate?
+
+    
+    @IBOutlet weak var navBarItem: UINavigationItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
-        //
-        //*********************************
-        //TEST CODE!!! REMOVE!!!
-        //Calendar.shared.populateSampleData(5)
-        //TEST CODE!!!
-        //*********************************
-        //
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        daysEvents = Calendar.shared.getDay(currentDay)
+        let df = NSDateFormatter()
+        df.dateStyle = .ShortStyle
+        navBarItem.title = df.stringFromDate(currentDay)
+        
+        
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -41,32 +41,35 @@ class HomeTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
+        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return the number of rows
-        return Calendar.shared.events.count
+        // #warning Incomplete implementation, return the number of rows
+        return daysEvents!.count
     }
 
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("eventcell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("daycell", forIndexPath: indexPath)
 
         // Configure the cell...
-        
-        let eventForCurrentRow = Calendar.shared.events[indexPath.row]
+        let eventForCurrentRow = daysEvents![indexPath.row]
         cell.textLabel?.text = eventForCurrentRow.eventTitle
         cell.tag = indexPath.row
-        
 
         return cell
     }
-    
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -111,22 +114,29 @@ class HomeTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        if segue.identifier == "homeToDetail" {
+        
+        if segue.identifier == "dayToNext" {
+            let nextViewController = segue.destinationViewController as! DayTableViewController
+            outgoingDay = currentDay.dateByAddingTimeInterval(86500)
+            nextViewController.currentDay = outgoingDay!
+        }
+        else if segue.identifier == "dayToPrevious" {
+            
+            let nextViewController = segue.destinationViewController as! DayTableViewController
+            outgoingDay = currentDay.dateByAddingTimeInterval(-86500)
+            nextViewController.currentDay = outgoingDay!
+        }
+        else if segue.identifier == "dayToDetail" {
             let nextViewController = segue.destinationViewController as! DetailViewController
             let selectedCell = sender as! UITableViewCell
             self.currentEvent = Calendar.shared.events[selectedCell.tag]
             nextViewController.currentEvent = self.currentEvent
         }
-        else if segue.identifier == "homeToEdit" {
+        else if segue.identifier == "dayToEdit" {
             let nextViewController = segue.destinationViewController as! EditViewController
-            nextViewController.currentEvent = Event(date: NSDate(), title: "", location: "", notes: "")
+            nextViewController.currentEvent = Event(date: currentDay, title: "", location: "", notes: "")
         }
-        else if segue.identifier == "homeToDay" {
-            let nextNavController = segue.destinationViewController as! UINavigationController
-            let nextViewController = nextNavController.topViewController as! DayTableViewController
-            nextViewController.currentDay = NSDate()
-            print(nextViewController.description)
-        }
+        
     }
 
 
