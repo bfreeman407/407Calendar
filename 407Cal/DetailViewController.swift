@@ -19,6 +19,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var notesLabel: UILabel!
     
     override func viewDidLoad() {
 
@@ -47,7 +48,7 @@ class DetailViewController: UIViewController {
         dateLabel.text = dateFormatter.stringFromDate(currentEvent!.eventDate)
         timeLabel.text = timeFormatter.stringFromDate(currentEvent!.eventDate)
         locationLabel.text = currentEvent?.eventLocation
-        notesText.text = currentEvent?.eventNotes
+        notesLabel.text = currentEvent?.eventNotes
 
     }
     

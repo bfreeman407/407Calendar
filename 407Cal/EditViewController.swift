@@ -11,6 +11,7 @@ import UIKit
 class EditViewController: UIViewController {
     
     var currentEvent : Event?
+    var isNew : Bool = false
 
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -19,6 +20,8 @@ class EditViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     
     @IBOutlet weak var notesTextField: UITextField!
+    
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     @IBAction func saveEvent(sender: AnyObject) {
         currentEvent?.eventDate = datePicker.date
@@ -53,6 +56,13 @@ class EditViewController: UIViewController {
         
         if self.currentEvent?.eventNotes != "" {
             notesTextField.text = currentEvent?.eventNotes
+        }
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if (isNew) {
+            deleteButton.title = "Cancel"
         }
     }
 

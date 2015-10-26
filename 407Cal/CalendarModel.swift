@@ -14,15 +14,6 @@ class Calendar {
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
-    
-    //TESTING CODE!!!
-    func populateSampleData(num: Int) {
-        for _ in 0...(num - 1) {
-            Calendar.shared.add(Event(date: NSDate(), title: "Sample Title", location: "Sample Location", notes: "Sample Notes"))
-        }
-    }
-    //TESTING CODE!!!
-    
     func restoreSavedData() {
         
         if defaults.arrayForKey("savedDates") == nil {

@@ -64,7 +64,17 @@ class DayTableViewController: UITableViewController {
 
         // Configure the cell...
         let eventForCurrentRow = daysEvents![indexPath.row]
+        
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.timeStyle = .ShortStyle
+        
+        var detailText = timeFormatter.stringFromDate(eventForCurrentRow.eventDate)
+        if eventForCurrentRow.eventLocation != "" {
+            detailText += " at \(eventForCurrentRow.eventLocation)"
+        }
+        
         cell.textLabel?.text = eventForCurrentRow.eventTitle
+        cell.detailTextLabel?.text = detailText
         cell.tag = indexPath.row
 
         return cell
@@ -135,6 +145,7 @@ class DayTableViewController: UITableViewController {
         else if segue.identifier == "dayToEdit" {
             let nextViewController = segue.destinationViewController as! EditViewController
             nextViewController.currentEvent = Event(date: currentDay, title: "", location: "", notes: "")
+            nextViewController.isNew = true
         }
         
     }

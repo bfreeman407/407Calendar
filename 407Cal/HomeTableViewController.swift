@@ -15,15 +15,6 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        //
-        //*********************************
-        //TEST CODE!!! REMOVE!!!
-        //Calendar.shared.populateSampleData(5)
-        //TEST CODE!!!
-        //*********************************
-        //
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -60,7 +51,21 @@ class HomeTableViewController: UITableViewController {
         // Configure the cell...
         
         let eventForCurrentRow = Calendar.shared.events[indexPath.row]
+        let timeFormatter = NSDateFormatter()
+        let dateFormatter = NSDateFormatter()
+        
+        timeFormatter.timeStyle = .ShortStyle
+        dateFormatter.dateStyle = .ShortStyle
+        
+        let timeString = timeFormatter.stringFromDate(eventForCurrentRow.eventDate)
+        var dateString = "\(dateFormatter.stringFromDate(eventForCurrentRow.eventDate)) at \(timeString)"
+        
+        if eventForCurrentRow.eventLocation != "" {
+            dateString += " at \(eventForCurrentRow.eventLocation)"
+        }
+        
         cell.textLabel?.text = eventForCurrentRow.eventTitle
+        cell.detailTextLabel?.text = dateString
         cell.tag = indexPath.row
         
 
@@ -120,6 +125,7 @@ class HomeTableViewController: UITableViewController {
         else if segue.identifier == "homeToEdit" {
             let nextViewController = segue.destinationViewController as! EditViewController
             nextViewController.currentEvent = Event(date: NSDate(), title: "", location: "", notes: "")
+            nextViewController.isNew = true
         }
         else if segue.identifier == "homeToDay" {
             let nextNavController = segue.destinationViewController as! UINavigationController
